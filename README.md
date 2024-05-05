@@ -9,7 +9,6 @@
 <p align="center">
 	<img alt="GitHub code size in bytes" src="https://img.shields.io/github/languages/code-size/Prodaturu/pipex?color=lightblue" />
 	<img alt="Number of lines of code" src="https://img.shields.io/tokei/lines/github/Prodaturu/pipex?color=critical" />
-	<img alt="Code language count" src="https://img.shields.io/github/languages/count/Prodaturu/pipex?color=yellow" />
 	<img alt="GitHub top language" src="https://img.shields.io/github/languages/top/Prodaturu/pipex?color=blue" />
 	<img alt="GitHub last commit" src="https://img.shields.io/github/last-commit/Prodaturu/pipex?color=green" />
 </p>
@@ -37,7 +36,7 @@ pipe()
 # fork() runs two processes (i.e. two commands) in one single program
 # dup2() swaps our files with stdin and stdout
  ````
-## Setting the pipe
+## Setting the pipe 📏
 
 ````
 void    pipex(int f1, int f2)
@@ -53,7 +52,7 @@ void    pipex(int f1, int f2)
 # end[1] will write to the its own fd, and end[0] will read end[1]’s fd and write to its own
 
 ````
-## Forking the processes
+## Forking the processes ⑃
 
 ````
 void    pipex(int f1, int f2)
@@ -99,7 +98,7 @@ Our fd table right now looks like this:
                  6         |     end[1]    |  
                            -----------------
 ````
-## Swapping fds with dup2()
+## Swapping fds with dup2() ⩕
 
 For the child process, we want infile to be our stdin (as input), and end[1] to be our stdout (we write to end[1] the output of cmd1)  
 In the parent process, we want end[0] to be our stdin (end[0] reads from end[1] the output of cmd1), and outfile to be our stdout (we write to it the output of cmd2)  

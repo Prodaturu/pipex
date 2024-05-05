@@ -1,5 +1,3 @@
-# Pipex
-
 <h1 align="center">
 	📖 Pipex
 </h1>

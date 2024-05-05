@@ -1,6 +1,3 @@
-Certainly! Here's the entire markdown for your README:
-
-```markdown
 # Pipex
 
 <h1 align="center">

@@ -1,5 +1,5 @@
 <h1 align="center">
-	📖 Pipex
+	📖 Pipex - 42
 </h1>
 
 <p align="center">
@@ -15,7 +15,7 @@
 </p>
 
 
-Pipex is a project that re-creates in C the way two commands are piped together via `|` in the shell
+Pipex is a project in C that re-creates the way two commands are piped together via `|` in the shell
 
 ````
 # ./pipex infile cmd1 cmd2 outfile
@@ -76,10 +76,10 @@ end[1] is the child process, end[0] the parent process; the child writes, the pa
 Since for something to be read, it must be written first, so cmd1 will be executed by the child, and cmd2 by the parent.  
 
 ## FDs
-pipex is run like this ./pipex infile cmd1 cmd2 outfile  
-FDs 0, 1 and 2 are by default assigned to stdin, stdout and stderr  
+Pipex is run like this ./pipex infile cmd1 cmd2 outfile  
+FDs 0, 1, and 2 are by default assigned to stdin, stdout, and stderr  
 `infile`, `outfile`, the pipe, the `stdin` and `stdout` are all FDs  
-On linux, you can check your fds currently open with the command ls -la /proc/$$/fd  
+On Linux, you can check your fds currently open with the command ls -la /proc/$$/fd  
 
 Our fd table right now looks like this:
 ````
@@ -105,7 +105,7 @@ For the child process, we want infile to be our stdin (as input), and end[1] to 
 In the parent process, we want end[0] to be our stdin (end[0] reads from end[1] the output of cmd1), and outfile to be our stdout (we write to it the output of cmd2)  
 Visually,
 ````
-// each cmd needs a stdin (input) and returns an output (to stdout)
+// Each cmd needs a stdin (input) and returns an output (to stdout)
    
     infile                                             outfile
 as stdin for cmd1                                 as stdout for cmd2            
@@ -128,13 +128,13 @@ From the MAN,
 int dup2(int fd1, int fd2) : it will close fd2 and duplicate the value of fd2 to fd1
 else said, it will redirect fd1 to fd2
 ````
-In pseudo code:
+In pseudo-code:
 ````
 # child_process(f1, cmd1); // add protection if dup2() < 0
 // dup2 close stdin, f1 becomes the new stdin
 dup2(f1, STDIN_FILENO); // we want f1 to be execve() input
 dup2(end[1], STDOUT_FILENO); // we want end[1] to be execve() stdout
-close(end[0]) # --> always close the end of the pipe you don't use,
+close(end[0]) # --> Always close the end of the pipe that's unused,
                     as long as the pipe is open, the other end will 
                     be waiting for some kind of input and will not
                     be able to finish its process
